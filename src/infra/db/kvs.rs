@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use std::sync::Mutex;
-use crate::adapters::gateway::kvs::Kvs;
+use crate::infra::adapters::gateway::kvs::Kvs;
 
 lazy_static! {
   pub static ref KVS: Mutex<Vec<String>> = Mutex::new(vec![]);

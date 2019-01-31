@@ -1,6 +1,5 @@
 use crate::domain::repositories::todo::ITodoRepository;
-//use crate::infra::db::kvs::KVS;
-use crate::adapters::gateway::kvs::Kvs;
+use super::super::gateway::kvs::Kvs;
 
 pub struct TodoRepositoryImpl{
     kvs: Box<Kvs>,

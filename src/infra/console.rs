@@ -1,14 +1,7 @@
-pub mod dto;
-
-use rand_core::{RngCore, SeedableRng};
-use rand_xorshift::XorShiftRng;
-
-use crate::infra::console::dto::create_todo::CTodoInput;
 use crate::infra::db::kvs::KvsImpl;
-use crate::adapters::controllers::create_todo::CreateTodoController;
-use crate::adapters::controllers::show_todo::ShowTodoController;
-use crate::adapters::repositories::todo::TodoRepositoryImpl;
-//use crate::adapters::dto::create_todo;
+use crate::infra::adapters::controllers::create_todo::CreateTodoController;
+use crate::infra::adapters::controllers::show_todo::ShowTodoController;
+use crate::infra::adapters::repositories::todo::TodoRepositoryImpl;
 
 #[allow(dead_code)]
 pub fn run(){
@@ -32,8 +25,6 @@ pub fn run(){
         else {
             println!("{}", line);
         }
-
-
     }
 }
 

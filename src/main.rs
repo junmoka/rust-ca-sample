@@ -1,5 +1,4 @@
-use rust_clean_architecture::infra;
-
+use rust_clean_architecture::system;
 fn main() {
-    infra::console::run();
+    system::run();
 }
