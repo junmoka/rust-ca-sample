@@ -1,13 +1,13 @@
-use crate::domain::usecases::create_todo::{ICreateTodo, DefaultCreateTodoImpl, CreateTodoInput};
+use crate::domain::usecases::create_todo::{ICreateTodo, CreateTodoImpl, CreateTodoInput};
 use crate::domain::repositories::todo::ITodoRepository;
 
-pub struct CreateTodoController {
-    usecase: Box<ICreateTodo>,
+pub struct CreateTodoController<T: ICreateTodo>{
+    usecase: T,
 }
 
-impl CreateTodoController{
-    pub fn new(repository: Box<ITodoRepository>) -> CreateTodoController{
-        CreateTodoController{usecase: Box::new(DefaultCreateTodoImpl::new(repository))}
+impl<T: ICreateTodo> CreateTodoController<T>{
+    pub fn new(usecase: T) -> CreateTodoController<T>{
+        CreateTodoController{usecase}
     }
 
     pub fn create(&self, name: String){

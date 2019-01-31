@@ -27,21 +27,19 @@ pub trait ICreateTodo{
 }
 
 //impl
-pub struct CreateTodoImpl{
-    repository: Box<ITodoRepository>,
+pub struct CreateTodoImpl<T: ITodoRepository>{
+    repository: T,
 }
 
-impl ICreateTodo for CreateTodoImpl{
+impl<T: ITodoRepository> ICreateTodo for CreateTodoImpl<T>{
     fn create(&self, input: CreateTodoInput) -> CreateTodoOutput{
         self.repository.save(input.name.clone());
         CreateTodoOutput::new(input.name.clone())
     }
 }
 
-impl CreateTodoImpl{
-    pub fn new(repository: Box<ITodoRepository>) -> CreateTodoImpl{
+impl<T: ITodoRepository> CreateTodoImpl<T>{
+    pub fn new(repository: T) -> CreateTodoImpl<T>{
         CreateTodoImpl{repository}
     }
 }
-
-pub type DefaultCreateTodoImpl = CreateTodoImpl;

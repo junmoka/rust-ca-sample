@@ -16,18 +16,18 @@ pub trait IShowTodo{
 }
 
 // impl
-pub struct ShowTodoImpl{
-    repository: Box<ITodoRepository>,
+pub struct ShowTodoImpl<T: ITodoRepository>{
+    repository: T,
 }
 
-impl IShowTodo for ShowTodoImpl{
+impl<T: ITodoRepository> IShowTodo for ShowTodoImpl<T>{
     fn show(&self) -> ShowTodoOutput{
         ShowTodoOutput::new(self.repository.show())
     }
 }
 
-impl ShowTodoImpl{
-    pub fn new(repository: Box<ITodoRepository>) -> ShowTodoImpl{
+impl<T: ITodoRepository> ShowTodoImpl<T>{
+    pub fn new(repository: T) -> ShowTodoImpl<T>{
         ShowTodoImpl{repository}
     }
 }

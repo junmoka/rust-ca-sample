@@ -2,6 +2,8 @@ use crate::infra::db::kvs::KvsImpl;
 use crate::infra::adapters::controllers::create_todo::CreateTodoController;
 use crate::infra::adapters::controllers::show_todo::ShowTodoController;
 use crate::infra::adapters::repositories::todo::TodoRepositoryImpl;
+use crate::domain::usecases::create_todo::CreateTodoImpl;
+use crate::domain::usecases::show_todo::ShowTodoImpl;
 
 #[allow(dead_code)]
 pub fn run(){
@@ -36,11 +38,13 @@ fn read<T: std::str::FromStr>() -> T {
 
 fn create_todo(arg: &str){
     let name = arg.to_string();
-    let controller = CreateTodoController::new(Box::new(TodoRepositoryImpl::new(Box::new(KvsImpl{}))));
+    let usecase = CreateTodoImpl::new(TodoRepositoryImpl::new(KvsImpl{}));
+    let controller = CreateTodoController::new(usecase);
     controller.create(name);
 }
 
 fn show_todo(){
-    let controller = ShowTodoController::new(Box::new(TodoRepositoryImpl::new(Box::new(KvsImpl{}))));
+    let usecase = ShowTodoImpl::new(TodoRepositoryImpl::new(KvsImpl{}));
+    let controller = ShowTodoController::new(usecase);
     controller.show();
 }

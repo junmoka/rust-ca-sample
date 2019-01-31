@@ -1,17 +1,17 @@
 use crate::domain::repositories::todo::ITodoRepository;
 use super::super::gateway::kvs::Kvs;
 
-pub struct TodoRepositoryImpl{
-    kvs: Box<Kvs>,
+pub struct TodoRepositoryImpl<T: Kvs>{
+    kvs: T,
 }
 
-impl TodoRepositoryImpl{
-    pub fn new(kvs: Box<Kvs>) -> TodoRepositoryImpl{
+impl<T: Kvs> TodoRepositoryImpl<T>{
+    pub fn new(kvs: T) -> TodoRepositoryImpl<T>{
         TodoRepositoryImpl{ kvs }
     }
 }
 
-impl ITodoRepository for TodoRepositoryImpl{
+impl<T: Kvs> ITodoRepository for TodoRepositoryImpl<T>{
     fn save(&self, name: String){
         self.kvs.write(name);
     }
