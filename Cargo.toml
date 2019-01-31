@@ -1,0 +1,12 @@
+[package]
+name = "rust_clean_architecture"
+version = "0.1.0"
+authors = ["jun"]
+edition = "2018"
+
+[dependencies]
+rand_core = "0.3.0"
+rand_xorshift = "0.1.1"
+lazy_static = "1.2.0"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
