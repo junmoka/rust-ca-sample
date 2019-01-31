@@ -1,5 +1,4 @@
-use crate::domain::usecases::create_todo::{ICreateTodo, CreateTodoImpl, CreateTodoInput};
-use crate::domain::repositories::todo::ITodoRepository;
+use crate::domain::usecases::create_todo::{ICreateTodo, CreateTodoInput};
 
 pub struct CreateTodoController<T: ICreateTodo>{
     usecase: T,

@@ -1,5 +1,4 @@
-use crate::domain::usecases::show_todo::{IShowTodo, ShowTodoImpl};
-use crate::domain::repositories::todo::ITodoRepository;
+use crate::domain::usecases::show_todo::IShowTodo;
 
 pub struct ShowTodoController<T: IShowTodo> {
     usecase: T,
