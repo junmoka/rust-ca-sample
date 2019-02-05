@@ -1,16 +1,17 @@
-use crate::domain::usecases::create_todo::{ICreateTodo, CreateTodoInput};
+use crate::infra::adapters::usecase_bus::*;
+use crate::domain::usecases::create_todo::*;
 
-pub struct CreateTodoController<T: ICreateTodo>{
-    usecase: T,
+pub struct CreateTodoController{
+    usecase_bus: UsecaseBus,
 }
 
-impl<T: ICreateTodo> CreateTodoController<T>{
-    pub fn new(usecase: T) -> CreateTodoController<T>{
-        CreateTodoController{usecase}
+impl CreateTodoController{
+    pub fn new(usecase_bus: UsecaseBus) -> CreateTodoController{
+        CreateTodoController{usecase_bus}
     }
 
     pub fn create(&self, name: String){
         let input = CreateTodoInput::new(name);
-        self.usecase.create(input);
+        self.usecase_bus.handle(input);
     }
 }

@@ -1,4 +1,7 @@
 use super::super::repositories::todo::*;
+use super::Usecase;
+
+pub struct ShowTodoInput;
 
 #[derive(Debug)]
 pub struct ShowTodoOutput{
@@ -11,17 +14,13 @@ impl ShowTodoOutput{
     }
 }
 
-pub trait IShowTodo{
-    fn show(&self) -> ShowTodoOutput;
-}
-
 // impl
 pub struct ShowTodoImpl<T: ITodoRepository>{
     repository: T,
 }
 
-impl<T: ITodoRepository> IShowTodo for ShowTodoImpl<T>{
-    fn show(&self) -> ShowTodoOutput{
+impl<T: ITodoRepository> Usecase<ShowTodoInput, ShowTodoOutput> for ShowTodoImpl<T>{
+    fn handle(&self, _input: ShowTodoInput) -> ShowTodoOutput{
         ShowTodoOutput::new(self.repository.show())
     }
 }

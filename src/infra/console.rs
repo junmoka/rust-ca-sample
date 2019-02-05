@@ -1,14 +1,5 @@
-use crate::infra::adapters::controllers::create_todo::CreateTodoController;
-use crate::infra::adapters::controllers::show_todo::ShowTodoController;
-
-/*
-use crate::infra::adapters::repositories::todo::TodoRepositoryImpl;
-use crate::domain::usecases::create_todo::CreateTodoImpl;
-use crate::domain::usecases::show_todo::ShowTodoImpl;
-use crate::infra::db::kvs::KvsImpl;
-*/
-
-use crate::infra::di::*;
+use crate::infra::adapters::controllers::prelude::*;
+use crate::infra::adapters::usecase_bus::*;
 
 #[allow(dead_code)]
 pub fn run(){
@@ -43,13 +34,11 @@ fn read<T: std::str::FromStr>() -> T {
 
 fn create_todo(arg: &str){
     let name = arg.to_string();
-    let usecase = DefaultCreateTodoImpl::new(DefaultTodoRepositoryImpl::new(DefaultKVS{}));
-    let controller = CreateTodoController::new(usecase);
+    let controller = CreateTodoController::new(UsecaseBus{});
     controller.create(name);
 }
 
 fn show_todo(){
-    let usecase = DefaultShowTodoImpl::new(DefaultTodoRepositoryImpl::new(DefaultKVS{}));
-    let controller = ShowTodoController::new(usecase);
+    let controller = ShowTodoController::new(UsecaseBus{});
     controller.show();
 }

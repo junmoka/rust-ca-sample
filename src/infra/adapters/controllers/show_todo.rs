@@ -1,16 +1,17 @@
-use crate::domain::usecases::show_todo::IShowTodo;
+use crate::infra::adapters::usecase_bus::*;
+use crate::domain::usecases::show_todo::*;
 
-pub struct ShowTodoController<T: IShowTodo> {
-    usecase: T,
+pub struct ShowTodoController {
+    usecase_bus: UsecaseBus,
 }
 
-impl<T: IShowTodo> ShowTodoController<T>{
-    pub fn new(usecase: T) -> ShowTodoController<T>{
-        ShowTodoController{usecase}
+impl ShowTodoController{
+    pub fn new(usecase_bus: UsecaseBus) -> ShowTodoController{
+        ShowTodoController{usecase_bus}
     }
 
     pub fn show(&self){
-        let v = self.usecase.show();
+        let v = self.usecase_bus.handle(ShowTodoInput{});
 
         println!("{:?}", v);
     }

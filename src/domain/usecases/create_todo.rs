@@ -1,4 +1,5 @@
 use super::super::repositories::todo::*;
+use super::Usecase;
 
 // IO
 pub struct CreateTodoInput{
@@ -21,18 +22,13 @@ impl CreateTodoOutput{
     }
 }
 
-//usecase
-pub trait ICreateTodo{
-    fn create(&self, input: CreateTodoInput) -> CreateTodoOutput;
-}
-
 //impl
 pub struct CreateTodoImpl<T: ITodoRepository>{
     repository: T,
 }
 
-impl<T: ITodoRepository> ICreateTodo for CreateTodoImpl<T>{
-    fn create(&self, input: CreateTodoInput) -> CreateTodoOutput{
+impl<T: ITodoRepository> Usecase<CreateTodoInput, CreateTodoOutput> for CreateTodoImpl<T>{
+    fn handle(&self, input: CreateTodoInput) -> CreateTodoOutput{
         self.repository.save(input.name.clone());
         CreateTodoOutput::new(input.name.clone())
     }
