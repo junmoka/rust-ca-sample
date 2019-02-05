@@ -8,6 +8,7 @@ edition = "2018"
 syn = "0.15.26"
 quote = "0.6.11"
 proc-macro2 = "0.4.27"
+case = "1.0.0"
 
 [lib]
 proc-macro = true

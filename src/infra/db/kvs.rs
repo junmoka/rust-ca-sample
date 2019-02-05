@@ -8,6 +8,12 @@ lazy_static! {
 
 pub struct KvsImpl;
 
+impl KvsImpl{
+    pub fn new() -> Self{
+        KvsImpl{}
+    }
+}
+
 impl Kvs for KvsImpl{
     fn read(&self) -> Vec<String>{
         KVS.lock().unwrap().clone()
