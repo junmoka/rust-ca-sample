@@ -18,7 +18,9 @@ fn impl_bus_macro(ast: &syn::DeriveInput) -> TokenStream {
     let mut impl_trait: Vec<proc_macro2::TokenStream> = Vec::new();
 
     impl_trait.push(quote!{
-        impl IUsecaseBus<CreateTodoInput, CreateTodoOutput> for #name {
+        impl IUsecaseBus<CreateTodoInput, CreateTodoOutput> for #name{}
+
+        impl Handler<CreateTodoInput, CreateTodoOutput> for #name {
             fn handle(&self, input: CreateTodoInput) -> CreateTodoOutput{
                 println!("handle CreateTodo");
 
@@ -29,7 +31,9 @@ fn impl_bus_macro(ast: &syn::DeriveInput) -> TokenStream {
     });
 
     impl_trait.push(quote!{
-        impl IUsecaseBus<ShowTodoInput, ShowTodoOutput> for #name {
+        impl IUsecaseBus<ShowTodoInput, ShowTodoOutput> for #name{}
+
+        impl Handler<ShowTodoInput, ShowTodoOutput> for #name {
             fn handle(&self, input: ShowTodoInput) -> ShowTodoOutput{
                 println!("handle ShowTodo");
                 let usecase = DefaultShowTodoImpl::new(DefaultTodoRepositoryImpl::new(DefaultKVS{}));

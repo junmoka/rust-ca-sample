@@ -1,5 +1,5 @@
 use super::super::repositories::todo::*;
-use super::Usecase;
+use super::{Usecase, Handler};
 
 // IO
 pub struct CreateTodoInput{
@@ -27,15 +27,16 @@ pub struct CreateTodoImpl<T: ITodoRepository>{
     repository: T,
 }
 
-impl<T: ITodoRepository> Usecase<CreateTodoInput, CreateTodoOutput> for CreateTodoImpl<T>{
-    fn handle(&self, input: CreateTodoInput) -> CreateTodoOutput{
-        self.repository.save(input.name.clone());
-        CreateTodoOutput::new(input.name.clone())
-    }
-}
-
 impl<T: ITodoRepository> CreateTodoImpl<T>{
     pub fn new(repository: T) -> CreateTodoImpl<T>{
         CreateTodoImpl{repository}
+    }
+}
+
+impl<T: ITodoRepository> Usecase<CreateTodoInput, CreateTodoOutput> for CreateTodoImpl<T>{}
+impl<T: ITodoRepository> Handler<CreateTodoInput, CreateTodoOutput> for CreateTodoImpl<T>{
+    fn handle(&self, input: CreateTodoInput) -> CreateTodoOutput{
+        self.repository.save(input.name.clone());
+        CreateTodoOutput::new(input.name.clone())
     }
 }
