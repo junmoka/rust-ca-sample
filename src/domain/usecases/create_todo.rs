@@ -7,7 +7,7 @@ pub struct CreateTodoInput{
 }
 
 impl CreateTodoInput{
-    pub fn new(name: String) -> CreateTodoInput{
+    pub fn new(name: String) -> Self{
         CreateTodoInput{name}
     }
 }
@@ -17,7 +17,7 @@ pub struct CreateTodoOutput{
 }
 
 impl CreateTodoOutput{
-    pub fn new(name: String) -> CreateTodoOutput{
+    pub fn new(name: String) -> Self{
         CreateTodoOutput{name}
     }
 }
@@ -28,7 +28,7 @@ pub struct CreateTodoImpl<T: ITodoRepository>{
 }
 
 impl<T: ITodoRepository> CreateTodoImpl<T>{
-    pub fn new(repository: T) -> CreateTodoImpl<T>{
+    pub fn new(repository: T) -> Self {
         CreateTodoImpl{repository}
     }
 }

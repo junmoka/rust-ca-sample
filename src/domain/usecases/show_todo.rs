@@ -9,7 +9,7 @@ pub struct ShowTodoOutput{
 }
 
 impl ShowTodoOutput{
-    pub fn new(todos: Vec<String>) -> ShowTodoOutput{
+    pub fn new(todos: Vec<String>) -> Self{
         ShowTodoOutput{todos}
     }
 }
@@ -20,7 +20,7 @@ pub struct ShowTodoImpl<T: ITodoRepository>{
 }
 
 impl<T: ITodoRepository> ShowTodoImpl<T>{
-    pub fn new(repository: T) -> ShowTodoImpl<T>{
+    pub fn new(repository: T) -> Self{
         ShowTodoImpl{repository}
     }
 }

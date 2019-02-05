@@ -7,7 +7,7 @@ pub struct ShowTodoController {
 }
 
 impl ShowTodoController{
-    pub fn new(usecase_bus: UsecaseBus) -> ShowTodoController{
+    pub fn new(usecase_bus: UsecaseBus) -> Self{
         ShowTodoController{usecase_bus}
     }
 

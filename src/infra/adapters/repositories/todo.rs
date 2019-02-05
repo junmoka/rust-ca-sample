@@ -6,7 +6,7 @@ pub struct TodoRepositoryImpl<T: Kvs>{
 }
 
 impl<T: Kvs> TodoRepositoryImpl<T>{
-    pub fn new(kvs: T) -> TodoRepositoryImpl<T>{
+    pub fn new(kvs: T) -> Self{
         TodoRepositoryImpl{ kvs }
     }
 }
