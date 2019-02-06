@@ -1,7 +1,7 @@
 use super::super::repositories::New;
 use super::super::repositories::todo::*;
 use super::{Usecase, Handler};
-use rust_clean_architecture_derive::UsecaseMacro;
+use rust_clean_architecture_derive::{New, UsecaseMacro};
 
 pub struct ShowTodoInput;
 
@@ -17,7 +17,7 @@ impl ShowTodoOutput{
 }
 
 // impl
-#[derive(UsecaseMacro)]
+#[derive(New, UsecaseMacro)]
 pub struct ShowTodoImpl<T: ITodoRepository>{
     repository: T,
 }
