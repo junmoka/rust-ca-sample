@@ -138,9 +138,7 @@ fn impl_new_macro(ast: &syn::DeriveInput) -> TokenStream {
     let gen = quote! {
         impl #impl_generics New for #name #ty_generics #where_clause{
             fn new() -> Self{
-                #name{
-                   #(#impl_new),*
-                }
+                Self{ #(#impl_new),* }
             }
         }
     };
