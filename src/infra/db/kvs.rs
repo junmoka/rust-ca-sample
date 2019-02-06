@@ -1,6 +1,7 @@
 use lazy_static::lazy_static;
 use std::sync::Mutex;
 use crate::infra::adapters::gateway::kvs::Kvs;
+use crate::domain::repositories::New;
 
 lazy_static! {
   pub static ref KVS: Mutex<Vec<String>> = Mutex::new(vec![]);
@@ -8,8 +9,8 @@ lazy_static! {
 
 pub struct KvsImpl;
 
-impl KvsImpl{
-    pub fn new() -> Self{
+impl New for KvsImpl{
+    fn new() -> Self{
         KvsImpl{}
     }
 }

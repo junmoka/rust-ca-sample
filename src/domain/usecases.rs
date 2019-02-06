@@ -1,3 +1,5 @@
+use super::repositories::New;
+
 pub mod create_todo;
 pub mod show_todo;
 
@@ -10,5 +12,5 @@ pub trait Handler<Input, Output>{
     fn handle(&self, input: Input) -> Output;
 }
 
-pub trait Usecase<Input, Output>: Handler<Input, Output>{}
+pub trait Usecase<Input, Output>: Handler<Input, Output> + New{}
 pub trait IUsecaseBus<Input, Output>: Handler<Input, Output>{}

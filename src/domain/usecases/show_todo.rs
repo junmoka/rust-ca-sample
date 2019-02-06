@@ -1,5 +1,7 @@
+use super::super::repositories::New;
 use super::super::repositories::todo::*;
 use super::{Usecase, Handler};
+use rust_clean_architecture_derive::UsecaseMacro;
 
 pub struct ShowTodoInput;
 
@@ -15,22 +17,13 @@ impl ShowTodoOutput{
 }
 
 // impl
+#[derive(UsecaseMacro)]
 pub struct ShowTodoImpl<T: ITodoRepository>{
     repository: T,
 }
-
-impl<T: ITodoRepository> ShowTodoImpl<T>{
-    pub fn new(repository: T) -> Self{
-        ShowTodoImpl{repository}
-    }
-}
-
-impl<T: ITodoRepository> Usecase<ShowTodoInput, ShowTodoOutput> for ShowTodoImpl<T>{}
 
 impl<T: ITodoRepository> Handler<ShowTodoInput, ShowTodoOutput> for ShowTodoImpl<T>{
     fn handle(&self, _input: ShowTodoInput) -> ShowTodoOutput{
         ShowTodoOutput::new(self.repository.show())
     }
 }
-
-
