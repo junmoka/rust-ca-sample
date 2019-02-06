@@ -1,4 +1,4 @@
-#[allow(unused_imports)]
+#![allow(unused_imports)]
 
 use crate::domain::usecases::IUsecaseBus;
 use crate::infra::adapters::usecase_bus::*;

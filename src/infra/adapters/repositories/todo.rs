@@ -1,6 +1,6 @@
 use crate::domain::repositories::New;
 use crate::domain::repositories::todo::ITodoRepository;
-use super::super::gateway::kvs::Kvs;
+use crate::infra::adapters::gateway::kvs::Kvs;
 use rust_clean_architecture_derive::New;
 
 #[derive(New)]

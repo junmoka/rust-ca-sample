@@ -1,5 +1,5 @@
 use crate::infra::adapters::controllers::prelude::*;
-use crate::infra::adapters::usecase_bus::*;
+use crate::infra::adapters::usecase_bus::UsecaseBus;
 
 #[allow(dead_code)]
 pub fn run(){

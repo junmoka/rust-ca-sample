@@ -29,7 +29,7 @@ impl CreateTodoOutput{
 #[derive(New, UsecaseMacro)]
 pub struct CreateTodoImpl<T: ITodoRepository, T2: ITodoRepository>{
     repository: T,
-    repository2: T2,
+    _repository2: T2,   //multi repository test
 }
 
 impl<T: ITodoRepository, T2: ITodoRepository> Handler<CreateTodoInput, CreateTodoOutput> for CreateTodoImpl<T, T2>{

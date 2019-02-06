@@ -1,7 +1,7 @@
 use crate::infra::db::kvs::KvsImpl;
-use crate::infra::adapters::repositories::todo::TodoRepositoryImpl;
-use crate::domain::usecases::create_todo::CreateTodoImpl;
-use crate::domain::usecases::show_todo::ShowTodoImpl;
+
+use crate::infra::adapters::repositories::prelude::*;
+use crate::domain::usecases::prelude::*;
 
 //DI定義
 // KVS
