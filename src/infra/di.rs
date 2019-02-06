@@ -13,4 +13,3 @@ pub type DefaultTodoRepositoryImpl = TodoRepositoryImpl<DefaultKVS>;
 // usecase
 pub type DefaultCreateTodoImpl = CreateTodoImpl<DefaultTodoRepositoryImpl, DefaultTodoRepositoryImpl>;
 pub type DefaultShowTodoImpl = ShowTodoImpl<DefaultTodoRepositoryImpl>;
-

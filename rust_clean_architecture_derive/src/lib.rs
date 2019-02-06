@@ -27,21 +27,15 @@ fn impl_bus_macro(ast: &syn::DeriveInput) -> TokenStream {
                 // Here, `entry` is a `DirEntry`.
                 if let Some(filename) = entry.file_name().to_str() {
                     let usecase_name = filename.replace(".rs", "").to_camel();
-                    let input = format!("{}Input", usecase_name);
-                    let output = format!("{}Output", usecase_name);
-                    let impl_klass = format!("Default{}Impl", usecase_name);
-
-                    let input = Ident::new(&input, Span::call_site());
-                    let output = Ident::new(&output, Span::call_site());
-                    let impl_klass = Ident::new(&impl_klass, Span::call_site());
+                    let input = Ident::new(&format!("{}Input", usecase_name), Span::call_site());
+                    let output = Ident::new(&format!("{}Output", usecase_name), Span::call_site());
+                    let impl_klass = Ident::new(&format!("Default{}Impl", usecase_name), Span::call_site());
 
                     impl_trait.push(quote!{
                         impl IUsecaseBus<#input, #output> for #name{}
 
                         impl Handler<#input, #output> for #name {
                             fn handle(&self, input: #input) -> #output{
-                                println!("handle");
-
                                 let usecase = #impl_klass::new();
                                 usecase.handle(input)
                             }

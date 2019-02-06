@@ -34,11 +34,11 @@ fn read<T: std::str::FromStr>() -> T {
 
 fn create_todo(arg: &str){
     let name = arg.to_string();
-    let controller = CreateTodoController::new(UsecaseBus{});
+    let controller = TodoController::new(UsecaseBus{});
     controller.create(name);
 }
 
 fn show_todo(){
-    let controller = ShowTodoController::new(UsecaseBus{});
+    let controller = TodoController::new(UsecaseBus{});
     controller.show();
 }
