@@ -133,15 +133,6 @@ fn impl_new_macro(ast: &syn::DeriveInput) -> TokenStream {
         }
     }
 
-    let input = Ident::new(
-        &format!("{}Input", name.to_string().replace("Impl", "")),
-        Span::call_site(),
-    );
-    let output = Ident::new(
-        &format!("{}Output", name.to_string().replace("Impl", "")),
-        Span::call_site(),
-    );
-
     let gen = quote! {
         impl #impl_generics New for #name #ty_generics #where_clause{
             fn new() -> Self{
