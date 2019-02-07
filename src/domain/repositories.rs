@@ -1,5 +1,5 @@
 pub mod todo;
 
-pub trait New{
+pub trait New {
     fn new() -> Self;
 }

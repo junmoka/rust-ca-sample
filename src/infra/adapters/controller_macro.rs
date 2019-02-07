@@ -6,12 +6,12 @@ macro_rules! def_controller {
             usecase_bus: UsecaseBus,
         }
 
-        impl Controller for $i{
-            fn new(usecase_bus: UsecaseBus) -> Self{
-                Self{usecase_bus}
+        impl Controller for $i {
+            fn new(usecase_bus: UsecaseBus) -> Self {
+                Self { usecase_bus }
             }
         }
-    }
+    };
 }
 
 // params: usecase

@@ -1,11 +1,11 @@
 extern crate proc_macro;
 
-use proc_macro::TokenStream;
-use quote::quote;
-use syn;
-use std::fs;
 use case::CaseExt;
+use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
+use quote::quote;
+use std::fs;
+use syn;
 
 #[proc_macro_derive(UsecaseBusMacro)]
 pub fn usecase_bus_macro_derive(input: TokenStream) -> TokenStream {
@@ -29,9 +29,10 @@ fn impl_bus_macro(ast: &syn::DeriveInput) -> TokenStream {
                     let usecase_name = filename.replace(".rs", "").to_camel();
                     let input = Ident::new(&format!("{}Input", usecase_name), Span::call_site());
                     let output = Ident::new(&format!("{}Output", usecase_name), Span::call_site());
-                    let impl_klass = Ident::new(&format!("Default{}Impl", usecase_name), Span::call_site());
+                    let impl_klass =
+                        Ident::new(&format!("Default{}Impl", usecase_name), Span::call_site());
 
-                    impl_trait.push(quote!{
+                    impl_trait.push(quote! {
                         impl IUsecaseBus<#input, #output> for #name{}
 
                         impl Handler<#input, #output> for #name {
@@ -69,14 +70,14 @@ fn impl_usecase_macro(ast: &syn::DeriveInput) -> TokenStream {
 
     let mut impl_new: Vec<proc_macro2::TokenStream> = Vec::new();
 
-    if let syn::Data::Struct(body) = &ast.data{
-        if let syn::Fields::Named(fields) = &body.fields{
+    if let syn::Data::Struct(body) = &ast.data {
+        if let syn::Fields::Named(fields) = &body.fields {
             let it = &mut fields.named.iter();
 
-            while let Some(t) = it.next(){
-                if let Some(ident) = &t.ident{
-                    if let syn::Type::Path(path_type) = &t.ty{
-                        impl_new.push(quote!{
+            while let Some(t) = it.next() {
+                if let Some(ident) = &t.ident {
+                    if let syn::Type::Path(path_type) = &t.ty {
+                        impl_new.push(quote! {
                             #ident: #path_type::new()
                         });
                     }
@@ -85,8 +86,14 @@ fn impl_usecase_macro(ast: &syn::DeriveInput) -> TokenStream {
         }
     }
 
-    let input = Ident::new(&format!("{}Input", name.to_string().replace("Impl","")), Span::call_site());
-    let output = Ident::new(&format!("{}Output", name.to_string().replace("Impl","")), Span::call_site());
+    let input = Ident::new(
+        &format!("{}Input", name.to_string().replace("Impl", "")),
+        Span::call_site(),
+    );
+    let output = Ident::new(
+        &format!("{}Output", name.to_string().replace("Impl", "")),
+        Span::call_site(),
+    );
 
     let gen = quote! {
         impl #impl_generics Usecase<#input, #output> for #name #ty_generics #where_clause{}
@@ -110,14 +117,14 @@ fn impl_new_macro(ast: &syn::DeriveInput) -> TokenStream {
 
     let mut impl_new: Vec<proc_macro2::TokenStream> = Vec::new();
 
-    if let syn::Data::Struct(body) = &ast.data{
-        if let syn::Fields::Named(fields) = &body.fields{
+    if let syn::Data::Struct(body) = &ast.data {
+        if let syn::Fields::Named(fields) = &body.fields {
             let it = &mut fields.named.iter();
 
-            while let Some(t) = it.next(){
-                if let Some(ident) = &t.ident{
-                    if let syn::Type::Path(path_type) = &t.ty{
-                        impl_new.push(quote!{
+            while let Some(t) = it.next() {
+                if let Some(ident) = &t.ident {
+                    if let syn::Type::Path(path_type) = &t.ty {
+                        impl_new.push(quote! {
                             #ident: #path_type::new()
                         });
                     }
@@ -126,8 +133,14 @@ fn impl_new_macro(ast: &syn::DeriveInput) -> TokenStream {
         }
     }
 
-    let input = Ident::new(&format!("{}Input", name.to_string().replace("Impl","")), Span::call_site());
-    let output = Ident::new(&format!("{}Output", name.to_string().replace("Impl","")), Span::call_site());
+    let input = Ident::new(
+        &format!("{}Input", name.to_string().replace("Impl", "")),
+        Span::call_site(),
+    );
+    let output = Ident::new(
+        &format!("{}Output", name.to_string().replace("Impl", "")),
+        Span::call_site(),
+    );
 
     let gen = quote! {
         impl #impl_generics New for #name #ty_generics #where_clause{

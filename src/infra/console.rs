@@ -2,25 +2,23 @@ use crate::infra::adapters::controllers::prelude::*;
 use crate::infra::adapters::usecase_bus::UsecaseBus;
 
 #[allow(dead_code)]
-pub fn run(){
+pub fn run() {
     println!("Run console");
 
-    loop{
+    loop {
         let line: String = read();
         let cmd: Vec<&str> = line.split(' ').collect();
         println!("{:?}", cmd);
 
-        if cmd.len() == 1 && cmd[0] == "exit"{
-            return
-        }
-        else if 1 < cmd.len() && cmd[0] == "todo" {
+        if cmd.len() == 1 && cmd[0] == "exit" {
+            return;
+        } else if 1 < cmd.len() && cmd[0] == "todo" {
             match cmd[1] {
                 "add" => create_todo(cmd[2]),
                 "show" => show_todo(),
-                _ =>  println!("not cmd"),
+                _ => println!("not cmd"),
             }
-        }
-        else {
+        } else {
             println!("{}", line);
         }
     }
@@ -32,13 +30,13 @@ fn read<T: std::str::FromStr>() -> T {
     s.trim().parse().ok().unwrap()
 }
 
-fn create_todo(arg: &str){
+fn create_todo(arg: &str) {
     let name = arg.to_string();
-    let controller = TodoController::new(UsecaseBus{});
+    let controller = TodoController::new(UsecaseBus {});
     controller.create(name);
 }
 
-fn show_todo(){
-    let controller = TodoController::new(UsecaseBus{});
+fn show_todo() {
+    let controller = TodoController::new(UsecaseBus {});
     controller.show();
 }

@@ -1,5 +1,5 @@
-mod infra;
 pub mod domain;
+mod infra;
 
 // default system is console
 pub use self::infra::console as system;
